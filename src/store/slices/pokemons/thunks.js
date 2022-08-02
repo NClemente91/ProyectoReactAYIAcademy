@@ -3,12 +3,12 @@ import { pokemonApi } from "../../../api/pokemonApi";
 import { setPokemons, startLoadingPokemon } from "./pokemonSlice";
 
 export const getPokemons = (page = 0) => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch(startLoadingPokemon());
 
     //Petición a la API
     const { data } = await pokemonApi.get(
-      `/pokemon?limit=10&offset=${page * 10}`
+      `/pokemon?limit=12&offset=${page * 12}`
     );
     const filterData = await Promise.all(
       data.results.map(async (pokemon) => {
@@ -21,6 +21,6 @@ export const getPokemons = (page = 0) => {
       })
     );
 
-    dispatch(setPokemons({ pokemons: filterData, page: page + 1 }));
+    dispatch(setPokemons({ pokemons: filterData }));
   };
 };

@@ -1,21 +1,30 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getPokemons } from "../../store/slices/pokemons";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import { Container, Grid } from "@mui/material";
 
-import { getPokemons } from "../../store/slices/pokemons";
 import Item from "../Item/Item";
 import "./styles.css";
 
 const ItemListContainer = () => {
+  const [page, setPage] = useState(1);
+
   const dispatch = useDispatch();
   let { isLoading, pokemons } = useSelector((state) => state.pokemons);
 
   useEffect(() => {
-    dispatch(getPokemons());
-  }, [dispatch]); //Ver porque sugiere esa dependencia
+    dispatch(getPokemons(page - 1));
+  }, [dispatch, page]);
+
+  const handleChange = (event, value) => {
+    event.preventDefault();
+    setPage(value);
+  };
 
   return (
     <section>
@@ -26,7 +35,7 @@ const ItemListContainer = () => {
           </Box>
         </Container>
       ) : (
-        <Container fixed sx={{ padding: 12 }}>
+        <Container fixed sx={{ paddingTop: 12, paddingBottom: 4 }}>
           <Grid
             container
             spacing={{ xs: 1, md: 2 }}
@@ -39,6 +48,17 @@ const ItemListContainer = () => {
                 </Grid>
               );
             })}
+          </Grid>
+          <Grid container justifyContent="center" sx={{ paddingTop: 3 }}>
+            <Stack spacing={2}>
+              <Pagination
+                count={54}
+                page={page}
+                variant="outlined"
+                shape="rounded"
+                onChange={handleChange}
+              />
+            </Stack>
           </Grid>
         </Container>
       )}

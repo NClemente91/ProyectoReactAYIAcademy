@@ -4,7 +4,7 @@ const PrivateRoute = ({ children }) => {
   //Ver como incorporar REDUX
   const user = true;
 
-  return user ? children : <Navigate to="/signin" />;
+  return user ? children : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;

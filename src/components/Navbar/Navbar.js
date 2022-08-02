@@ -18,11 +18,17 @@ import Button from "@mui/material/Button";
 import "./styles.css";
 
 const drawerWidth = 240;
+
 const navItems = [
-  { title: "Productos", link: "/" },
-  { title: "Nosotros", link: "/about" },
-  { title: "Carrito", link: "/cart" },
+  { title: "Home", link: "/" },
+  { title: "Register", link: "/register" },
+  { title: "Login", link: "/login" },
 ];
+// const navItemsLogged = [
+//   { title: "Home", link: "/" },
+//   { title: "Pokemon Cards", link: "/pokemons" },
+//   { title: "Logout", link: "/logout" },
+// ];
 
 const NavBar = (props) => {
   const { window } = props;
@@ -35,7 +41,7 @@ const NavBar = (props) => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        TAREA
+        Pokemon Store
       </Typography>
       <Divider />
       <List>
@@ -73,7 +79,7 @@ const NavBar = (props) => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            TAREA
+            Pokemon Store
           </Typography>
 
           <Box sx={{ display: { xs: "none", sm: "block" } }}>

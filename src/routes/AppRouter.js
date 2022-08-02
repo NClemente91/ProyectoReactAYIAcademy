@@ -4,8 +4,8 @@ import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 
 import Navbar from "../components/Navbar/Navbar";
-import SignIn from "../components/SignIn/SignIn";
-import SignUp from "../components/SignUp/SignUp";
+import Login from "../components/Login/Login";
+import Register from "../components/Register/Register";
 import ItemListContainer from "../components/ItemListContainer/ItemListContainer";
 import Footer from "../components/Footer/Footer";
 
@@ -15,18 +15,18 @@ const AppRouter = () => {
       <Navbar />
       <Routes>
         <Route
-          path="/signin"
+          path="/login"
           element={
             <PublicRoute>
-              <SignIn />
+              <Login />
             </PublicRoute>
           }
         />
         <Route
-          path="/signup"
+          path="/register"
           element={
             <PublicRoute>
-              <SignUp />
+              <Register />
             </PublicRoute>
           }
         />
