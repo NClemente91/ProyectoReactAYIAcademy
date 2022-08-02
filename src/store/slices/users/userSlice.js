@@ -1,7 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  users: [],
+  users: [
+    {
+      firstName: "admin",
+      lastName: "admin",
+      email: "admin@example.com",
+      password: "12345",
+    },
+  ],
+  isUserLogged: false,
 };
 
 export const userSlice = createSlice({
@@ -11,20 +19,21 @@ export const userSlice = createSlice({
     setUser: (state, action) => {
       state.users.push(action.payload);
     },
-    // isExistUser: (state, action) => {
-    //   for (let i = 0; i < state.users.length; i++) {
-    //     if (
-    //       state.users[i].email === action.payload.email &&
-    //       state.users[i].password === action.payload.password
-    //     ) {
-    //       console.log("Usuario existente");
-    //     }
-    //   }
-    // },
-    // isLogged: (state) => {
-
-    // }
+    isLogged: (state, action) => {
+      for (let i = 0; i < state.users.length; i++) {
+        if (
+          state.users[i].email === action.payload.email &&
+          state.users[i].password === action.payload.password
+        ) {
+          state.isUserLogged = true;
+          return;
+        }
+      }
+    },
+    isLogout: (state) => {
+      state.isUserLogged = false;
+    },
   },
 });
 
-export const { setUser, isExistUser } = userSlice.actions;
+export const { setUser, isLogged, isLogout } = userSlice.actions;

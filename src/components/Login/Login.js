@@ -1,7 +1,7 @@
 import * as React from "react";
-// import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-//import { isExistUser } from "../../store/slices/users";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { isLogged } from "../../store/slices/users";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -16,7 +16,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme();
 
 const Login = () => {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -24,7 +25,8 @@ const Login = () => {
       email: event.target.email.value,
       password: event.target.password.value,
     };
-    console.log(userLogged);
+    dispatch(isLogged(userLogged));
+    navigate("/");
   };
 
   return (

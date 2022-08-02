@@ -8,6 +8,7 @@ import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import ItemListContainer from "../components/ItemListContainer/ItemListContainer";
 import Footer from "../components/Footer/Footer";
+import Logout from "../components/Logout/Logout";
 
 const AppRouter = () => {
   return (
@@ -28,6 +29,14 @@ const AppRouter = () => {
             <PublicRoute>
               <Register />
             </PublicRoute>
+          }
+        />
+        <Route
+          path="/logout"
+          element={
+            <PrivateRoute>
+              <Logout />
+            </PrivateRoute>
           }
         />
         <Route

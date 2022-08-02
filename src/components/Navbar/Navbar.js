@@ -1,5 +1,8 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+
+import { useSelector } from "react-redux";
+
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -24,15 +27,16 @@ const navItems = [
   { title: "Register", link: "/register" },
   { title: "Login", link: "/login" },
 ];
-// const navItemsLogged = [
-//   { title: "Home", link: "/" },
-//   { title: "Pokemon Cards", link: "/pokemons" },
-//   { title: "Logout", link: "/logout" },
-// ];
+const navItemsLogged = [
+  { title: "Home", link: "/" },
+  { title: "Logout", link: "/logout" },
+];
 
 const NavBar = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const { isUserLogged } = useSelector((state) => state.users);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -45,15 +49,25 @@ const NavBar = (props) => {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <Link className="navbar-link" to={item.link} key={item.title}>
-            <ListItem disablePadding>
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={item.title} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        ))}
+        {!isUserLogged
+          ? navItems.map((item) => (
+              <Link className="navbar-link" to={item.link} key={item.title}>
+                <ListItem disablePadding>
+                  <ListItemButton sx={{ textAlign: "center" }}>
+                    <ListItemText primary={item.title} />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+            ))
+          : navItemsLogged.map((item) => (
+              <Link className="navbar-link" to={item.link} key={item.title}>
+                <ListItem disablePadding>
+                  <ListItemButton sx={{ textAlign: "center" }}>
+                    <ListItemText primary={item.title} />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+            ))}
       </List>
     </Box>
   );
@@ -83,11 +97,17 @@ const NavBar = (props) => {
           </Typography>
 
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Link className="navbar-link" to={item.link} key={item.title}>
-                <Button sx={{ color: "#fff" }}>{item.title}</Button>
-              </Link>
-            ))}
+            {!isUserLogged
+              ? navItems.map((item) => (
+                  <Link className="navbar-link" to={item.link} key={item.title}>
+                    <Button sx={{ color: "#fff" }}>{item.title}</Button>
+                  </Link>
+                ))
+              : navItemsLogged.map((item) => (
+                  <Link className="navbar-link" to={item.link} key={item.title}>
+                    <Button sx={{ color: "#fff" }}>{item.title}</Button>
+                  </Link>
+                ))}
           </Box>
         </Toolbar>
       </AppBar>
