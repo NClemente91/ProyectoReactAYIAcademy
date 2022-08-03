@@ -20,6 +20,7 @@ export const userSlice = createSlice({
       state.users.push(action.payload);
     },
     isLogged: (state, action) => {
+      //ver find
       for (let i = 0; i < state.users.length; i++) {
         if (
           state.users[i].email === action.payload.email &&

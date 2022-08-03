@@ -38,13 +38,18 @@ const ItemListContainer = () => {
         <Container fixed sx={{ paddingTop: 12, paddingBottom: 4 }}>
           <Grid
             container
-            spacing={{ xs: 1, md: 2 }}
+            spacing={{ xs: 2, md: 3 }}
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
-            {pokemons.map(({ name, img, type }) => {
+            {pokemons.map(({ pokemonId, name, img, types }) => {
               return (
-                <Grid item xs={12} sm={4} md={3} key={name}>
-                  <Item title={name} pictureUrl={img} type={type} />
+                <Grid item xs={12} sm={4} md={3} key={pokemonId}>
+                  <Item
+                    id={pokemonId}
+                    name={name}
+                    pictureUrl={img}
+                    types={types}
+                  />
                 </Grid>
               );
             })}
