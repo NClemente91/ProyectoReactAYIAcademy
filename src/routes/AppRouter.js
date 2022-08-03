@@ -7,8 +7,8 @@ import Navbar from "../components/Navbar/Navbar";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import ItemListContainer from "../components/ItemListContainer/ItemListContainer";
+import ItemDetailContainer from "../components/ItemDetailContainer/ItemDetailContainer";
 import Footer from "../components/Footer/Footer";
-import Logout from "../components/Logout/Logout";
 
 const AppRouter = () => {
   return (
@@ -32,18 +32,13 @@ const AppRouter = () => {
           }
         />
         <Route
-          path="/logout"
-          element={
-            <PrivateRoute>
-              <Logout />
-            </PrivateRoute>
-          }
-        />
-        <Route
           path="/*"
           element={
             <PrivateRoute>
-              <ItemListContainer />
+              <Routes>
+                <Route path="/" element={<ItemListContainer />} />
+                <Route path="/pokemon/:id" element={<ItemDetailContainer />} />
+              </Routes>
             </PrivateRoute>
           }
         />

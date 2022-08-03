@@ -33,7 +33,7 @@ const ItemListContainer = () => {
           </Box>
         </Container>
       ) : (
-        <Container fixed sx={{ paddingTop: 12, paddingBottom: 4 }}>
+        <Container fixed sx={{ paddingTop: 8, paddingBottom: 4 }}>
           <Grid
             container
             spacing={{ xs: 2, md: 4 }}

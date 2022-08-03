@@ -48,6 +48,7 @@ const NavBar = (props) => {
   const hanldeClickHome = (event) => {
     event.preventDefault();
     dispatch(getPokemons());
+    navigate("/");
   };
 
   const handleDrawerToggle = () => {
@@ -57,7 +58,7 @@ const NavBar = (props) => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        Pokemon Store
+        PokeCards
       </Typography>
       <Divider />
       <List>
@@ -117,7 +118,7 @@ const NavBar = (props) => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            Pokemon Store
+            PokeCards
           </Typography>
 
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
