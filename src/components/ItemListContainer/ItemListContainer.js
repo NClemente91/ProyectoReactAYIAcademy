@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemons } from "../../store/slices/pokemons";
 
@@ -12,18 +12,16 @@ import Item from "../Item/Item";
 import "./styles.css";
 
 const ItemListContainer = () => {
-  const [page, setPage] = useState(1);
-
   const dispatch = useDispatch();
-  let { isLoading, pokemons } = useSelector((state) => state.pokemons);
+  let { isLoading, pokemons, page } = useSelector((state) => state.pokemons);
 
   useEffect(() => {
-    dispatch(getPokemons(page - 1));
+    dispatch(getPokemons(page));
   }, [dispatch, page]);
 
   const handleChange = (event, value) => {
     event.preventDefault();
-    setPage(value);
+    dispatch(getPokemons(value));
   };
 
   return (
@@ -38,7 +36,7 @@ const ItemListContainer = () => {
         <Container fixed sx={{ paddingTop: 12, paddingBottom: 4 }}>
           <Grid
             container
-            spacing={{ xs: 2, md: 3 }}
+            spacing={{ xs: 2, md: 4 }}
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
             {pokemons.map(({ pokemonId, name, img, types }) => {

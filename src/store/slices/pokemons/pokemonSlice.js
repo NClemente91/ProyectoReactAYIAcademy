@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 //Estado inicial
 const initialState = {
+  page: 1,
   pokemons: [],
   isLoading: false,
 };
@@ -16,6 +17,7 @@ export const pokemonSlice = createSlice({
     setPokemons: (state, action) => {
       state.isLoading = false;
       state.pokemons = action.payload.pokemons;
+      state.page = action.payload.page;
     },
   },
 });

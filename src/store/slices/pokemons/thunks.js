@@ -85,13 +85,13 @@ const pokemonsTypes = [
   },
 ];
 
-export const getPokemons = (page = 0) => {
+export const getPokemons = (page = 1) => {
   return async (dispatch) => {
     dispatch(startLoadingPokemon());
 
     //Petición a la API
     const { data } = await pokemonApi.get(
-      `/pokemon?limit=12&offset=${page * 12}`
+      `/pokemon?limit=12&offset=${(page - 1) * 12}`
     );
     const filterData = await Promise.all(
       data.results.map(async (pokemon) => {
@@ -109,6 +109,6 @@ export const getPokemons = (page = 0) => {
       })
     );
 
-    dispatch(setPokemons({ pokemons: filterData }));
+    dispatch(setPokemons({ pokemons: filterData, page }));
   };
 };
