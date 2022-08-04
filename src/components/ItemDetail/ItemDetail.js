@@ -34,7 +34,7 @@ const ItemDetail = ({ id, name, pictureUrl, types, stats, weight, height }) => {
   };
 
   return (
-    <Container fixed sx={{ paddingTop: 12, paddingBottom: 10 }}>
+    <Container fixed sx={{ paddingTop: 6, paddingBottom: 4 }}>
       <Grid
         container
         columns={{ xs: 12, sm: 12, md: 10 }}
@@ -111,6 +111,28 @@ const ItemDetail = ({ id, name, pictureUrl, types, stats, weight, height }) => {
                   );
                 })}
               </Grid>
+
+              <Typography
+                paddingTop={2}
+                gutterBottom
+                variant="h6"
+                align="center"
+                textTransform="capitalize"
+                fontStyle="italic"
+                component="div"
+              >
+                {`Weight: ${weight}`}
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h6"
+                align="center"
+                textTransform="capitalize"
+                fontStyle="italic"
+                component="div"
+              >
+                {`Height: ${height}`}
+              </Typography>
               <Box>
                 {stats.map((stat, value) => {
                   return (
