@@ -84,45 +84,53 @@ const pokemonsTypes = [
 ];
 
 export const getAllPokemons = async (page) => {
-  const { data } = await pokemonApi.get(
-    `/pokemon?limit=12&offset=${(page - 1) * 12}`
-  );
-  return await Promise.all(
-    data.results.map(async (pokemon) => {
-      const resGeneral = await pokemonApi.get(`/pokemon/${pokemon.name}`);
-      return {
-        pokemonId: resGeneral.data.id,
-        name: resGeneral.data.name,
-        img: resGeneral.data.sprites.other.dream_world.front_default,
-        types: resGeneral.data.types.map((pok) => {
-          return pokemonsTypes.filter(
-            (pokemonType) => pokemonType.name === pok.type.name
-          );
-        }),
-      };
-    })
-  );
+  try {
+    const { data } = await pokemonApi.get(
+      `/pokemon?limit=12&offset=${(page - 1) * 12}`
+    );
+    return await Promise.all(
+      data.results.map(async (pokemon) => {
+        const resGeneral = await pokemonApi.get(`/pokemon/${pokemon.name}`);
+        return {
+          pokemonId: resGeneral.data.id,
+          name: resGeneral.data.name,
+          img: resGeneral.data.sprites.other.dream_world.front_default,
+          types: resGeneral.data.types.map((pok) => {
+            return pokemonsTypes.filter(
+              (pokemonType) => pokemonType.name === pok.type.name
+            );
+          }),
+        };
+      })
+    );
+  } catch (error) {
+    return error.message;
+  }
 };
 
 export const getOnePokemon = async (id) => {
-  const { data } = await pokemonApi.get(`/pokemon/${id}`);
+  try {
+    const { data } = await pokemonApi.get(`/pokemon/${id}`);
 
-  return {
-    pokemonId: data.id,
-    name: data.name,
-    img: data.sprites.other.dream_world.front_default,
-    types: data.types.map((pok) => {
-      return pokemonsTypes.filter(
-        (pokemonType) => pokemonType.name === pok.type.name
-      );
-    }),
-    weight: data.weight,
-    height: data.height,
-    stats: data.stats.map((stat) => {
-      return {
-        name: stat.stat.name,
-        value: stat.base_stat,
-      };
-    }),
-  };
+    return {
+      pokemonId: data.id,
+      name: data.name,
+      img: data.sprites.other.dream_world.front_default,
+      types: data.types.map((pok) => {
+        return pokemonsTypes.filter(
+          (pokemonType) => pokemonType.name === pok.type.name
+        );
+      }),
+      weight: data.weight,
+      height: data.height,
+      stats: data.stats.map((stat) => {
+        return {
+          name: stat.stat.name,
+          value: stat.base_stat,
+        };
+      }),
+    };
+  } catch (error) {
+    return error.message;
+  }
 };

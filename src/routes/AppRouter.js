@@ -8,6 +8,7 @@ import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import ItemListContainer from "../components/ItemListContainer/ItemListContainer";
 import ItemDetailContainer from "../components/ItemDetailContainer/ItemDetailContainer";
+import ItemFavoritesContainer from "../components/ItemFavoritesContainer/ItemFavoritesContainer";
 import Footer from "../components/Footer/Footer";
 
 const AppRouter = () => {
@@ -38,6 +39,7 @@ const AppRouter = () => {
               <Routes>
                 <Route path="/" element={<ItemListContainer />} />
                 <Route path="/pokemon/:id" element={<ItemDetailContainer />} />
+                <Route path="/favorites" element={<ItemFavoritesContainer />} />
               </Routes>
             </PrivateRoute>
           }

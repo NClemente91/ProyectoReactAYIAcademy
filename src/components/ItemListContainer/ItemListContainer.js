@@ -2,13 +2,17 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemons } from "../../store/slices/pokemons";
 
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
-import { Container, Grid } from "@mui/material";
+import {
+  Container,
+  Grid,
+  CircularProgress,
+  Box,
+  Pagination,
+  Stack,
+} from "@mui/material";
 
 import Item from "../Item/Item";
+
 import "./styles.css";
 
 const ItemListContainer = () => {
@@ -33,7 +37,7 @@ const ItemListContainer = () => {
           </Box>
         </Container>
       ) : (
-        <Container fixed sx={{ paddingTop: 8, paddingBottom: 4 }}>
+        <Container fixed sx={{ paddingTop: 12, paddingBottom: 4 }}>
           <Grid
             container
             spacing={{ xs: 2, md: 4 }}

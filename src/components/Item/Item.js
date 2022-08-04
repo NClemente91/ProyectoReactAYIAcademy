@@ -1,11 +1,14 @@
 import * as React from "react";
-
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { Box, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
+
+import {
+  Box,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 
 import "./styles.css";
 
@@ -36,18 +39,17 @@ const Item = ({ id, name, pictureUrl, types }) => {
           </Typography>
           <Typography
             gutterBottom
-            variant="h4"
+            variant="h5"
             align="center"
             textTransform="capitalize"
             fontStyle="italic"
-            component="div"
           >
             {name}
           </Typography>
           <Grid container spacing={2}>
             {types.map((type) => {
               return (
-                <Grid item xs={4} textAlign="center" key={type[0].name}>
+                <Grid contain item xs={4} textAlign="center" key={type[0].name}>
                   <Box
                     sx={{
                       backgroundColor: `${type[0].color}`,

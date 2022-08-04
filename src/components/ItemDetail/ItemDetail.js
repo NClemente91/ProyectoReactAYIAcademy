@@ -1,12 +1,38 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { Box, Grid, Container, LinearProgress } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setFavsUser } from "../../store/slices/users";
+
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import AddIcon from "@mui/icons-material/Add";
+import {
+  Box,
+  Grid,
+  Container,
+  LinearProgress,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 
 const ItemDetail = ({ id, name, pictureUrl, types, stats, weight, height }) => {
-  // console.log({ id, name, pictureUrl, types, stats, weight, height });
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const handleClickBack = (event) => {
+    event.preventDefault();
+    navigate("/");
+  };
+
+  const handleClickFav = (event) => {
+    event.preventDefault();
+    dispatch(setFavsUser({ id, name, pictureUrl, types }));
+    navigate("/favorites");
+  };
+
   return (
     <Container fixed sx={{ paddingTop: 12, paddingBottom: 10 }}>
       <Grid
@@ -22,6 +48,20 @@ const ItemDetail = ({ id, name, pictureUrl, types, stats, weight, height }) => {
               boxShadow: `0 0 10px 0 black`,
             }}
           >
+            <Grid container justifyContent="space-between" spacing={2}>
+              <Grid item xs={4} textAlign="center">
+                <Button onClick={handleClickBack}>
+                  <ArrowBackIcon />
+                </Button>
+              </Grid>
+              <Grid item xs={4} textAlign="center">
+                <Button onClick={handleClickFav}>
+                  <AddIcon />
+                  <span>Fav</span>
+                </Button>
+              </Grid>
+            </Grid>
+
             <CardMedia
               sx={{
                 objectFit: "contain",
@@ -48,9 +88,9 @@ const ItemDetail = ({ id, name, pictureUrl, types, stats, weight, height }) => {
                 {name}
               </Typography>
               <Grid container justifyContent="center" spacing={2}>
-                {types.map((type) => {
+                {types.map((type, value) => {
                   return (
-                    <Grid item xs={4} textAlign="center" key={type.color}>
+                    <Grid item xs={4} textAlign="center" key={value}>
                       <Box
                         sx={{
                           backgroundColor: `${type[0].color}`,
@@ -72,15 +112,15 @@ const ItemDetail = ({ id, name, pictureUrl, types, stats, weight, height }) => {
                 })}
               </Grid>
               <Box>
-                {stats.map((stat) => {
+                {stats.map((stat, value) => {
                   return (
-                    <>
+                    <div key={value}>
                       <p>{stat.name}</p>
                       <LinearProgress
                         variant="determinate"
                         value={stat.value}
                       />
-                    </>
+                    </div>
                   );
                 })}
               </Box>

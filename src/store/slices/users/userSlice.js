@@ -7,8 +7,10 @@ const initialState = {
       lastName: "admin",
       email: "admin@example.com",
       password: "12345",
+      favorites: [],
     },
   ],
+  userLogged: [],
   isUserLogged: false,
 };
 
@@ -19,16 +21,31 @@ export const userSlice = createSlice({
     setUser: (state, action) => {
       state.users.push(action.payload);
     },
+    setFavsUser: (state, action) => {
+      const indexPokemonFav = state.userLogged.favorites.findIndex(
+        (pok) => pok.id === action.payload.id
+      );
+      if (indexPokemonFav === -1) {
+        state.userLogged.favorites.push(action.payload);
+      }
+    },
+    deleteFavUser: (state, action) => {
+      const indexDeletePokemonFav = state.userLogged.favorites.findIndex(
+        (pok) => pok.id === action.payload.id
+      );
+      if (indexDeletePokemonFav !== -1) {
+        state.userLogged.favorites.splice(indexDeletePokemonFav, 1);
+      }
+    },
     isLogged: (state, action) => {
-      //ver find
-      for (let i = 0; i < state.users.length; i++) {
-        if (
-          state.users[i].email === action.payload.email &&
-          state.users[i].password === action.payload.password
-        ) {
-          state.isUserLogged = true;
-          return;
-        }
+      const indexUser = state.users.findIndex(
+        (user) =>
+          user.email === action.payload.email &&
+          user.password === action.payload.password
+      );
+      if (indexUser !== -1) {
+        state.userLogged = state.users[indexUser];
+        state.isUserLogged = true;
       }
     },
     isLogout: (state) => {
@@ -37,4 +54,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUser, isLogged, isLogout } = userSlice.actions;
+export const { setUser, setFavsUser, deleteFavUser, isLogged, isLogout } =
+  userSlice.actions;

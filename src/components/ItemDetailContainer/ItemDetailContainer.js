@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getPokemon } from "../../store/slices/pokemons";
 
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-import { Container, Grid } from "@mui/material";
-
 import ItemDetail from "../ItemDetail/ItemDetail";
+
+import { Container, Grid, Box, CircularProgress } from "@mui/material";
+
 import "./styles.css";
 
 const ItemDetailContainer = () => {
